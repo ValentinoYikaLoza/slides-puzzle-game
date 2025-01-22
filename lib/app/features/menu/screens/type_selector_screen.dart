@@ -3,10 +3,9 @@ import 'package:gambling_game/app/config/router/app_router.dart';
 import 'package:gambling_game/app/features/menu/routes/menu_routes.dart';
 import 'package:gambling_game/app/features/menu/widgets/animated_background.dart';
 import 'package:gambling_game/app/features/menu/widgets/custom_button.dart';
-import 'package:gambling_game/app/features/shop/routes/shop_routes.dart';
 
-class MenuScreen extends StatelessWidget {
-  const MenuScreen({super.key});
+class TypeSelectorScreen extends StatelessWidget {
+  const TypeSelectorScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +21,10 @@ class MenuScreen extends StatelessWidget {
               children: [
                 // Title with Shadow
                 Text(
-                  'Slide Puzzle',
+                  'Choose Puzzle Type',
                   style: TextStyle(
                     color: Colors.blue.shade800,
-                    fontSize: 48,
+                    fontSize: 36,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Poppins',
                     shadows: [
@@ -38,43 +37,30 @@ class MenuScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 40),
-                // Play Button
+                // Image Puzzle Button
                 CustomButton(
-                  icon: Icons.play_arrow,
-                  label: 'Play',
+                  icon: Icons.image,
+                  label: 'Image Puzzle',
                   onPressed: () {
-                    // Play sound effect
-                    // playSound('button_click.mp3');
-                    AppRouter.push(MenuRoutes.typeSelector.path);
+                    AppRouter.push(MenuRoutes.levelSelector.path);
                   },
                 ),
                 const SizedBox(height: 20),
-                // Challenge Button
+                // Number Puzzle Button
                 CustomButton(
-                  icon: Icons.emoji_events,
-                  label: 'Challenges',
+                  icon: Icons.numbers,
+                  label: 'Number Puzzle',
                   onPressed: () {
-                    AppRouter.push(MenuRoutes.challengeSelector.path);
+                    AppRouter.push(MenuRoutes.levelSelector.path);
                   },
                 ),
                 const SizedBox(height: 20),
-                // Shop Button
+                // Other Puzzle Button
                 CustomButton(
-                  icon: Icons.shopping_cart,
-                  label: 'Shop',
+                  icon: Icons.extension,
+                  label: 'Other Puzzle',
                   onPressed: () {
-                    // Play sound effect
-                    // playSound('button_click.mp3');
-                    AppRouter.push(ShopRoutes.shop.path);
-                  },
-                ),
-                const SizedBox(height: 20),
-                // Premium Shop Button
-                CustomButton(
-                  icon: Icons.attach_money,
-                  label: 'Premium Shop',
-                  onPressed: () {
-                    AppRouter.push(ShopRoutes.realshop.path);
+                    AppRouter.push(MenuRoutes.levelSelector.path);
                   },
                 ),
               ],

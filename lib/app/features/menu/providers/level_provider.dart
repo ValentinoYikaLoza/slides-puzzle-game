@@ -15,6 +15,10 @@ class LevelNotifier extends StateNotifier<LevelState> {
       levelNumbersUnlocked: state.levelNumbersUnlocked + 1,
     );
   }
+
+  bool isLevelComplete(int currenLevel) {
+    return state.levelNumbersUnlocked > currenLevel;
+  }
 }
 
 class LevelState {
@@ -22,7 +26,7 @@ class LevelState {
   final int totalLevelNumbers;
 
   LevelState({
-    this.levelNumbersUnlocked = 16,
+    this.levelNumbersUnlocked = 1,
     this.totalLevelNumbers = 100,
   });
 

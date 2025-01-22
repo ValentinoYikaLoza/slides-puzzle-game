@@ -4,47 +4,20 @@ import 'package:gambling_game/app/config/router/app_router.dart';
 import 'package:gambling_game/app/features/game/routes/game_routes.dart';
 import 'package:gambling_game/app/features/menu/providers/level_provider.dart';
 import 'package:gambling_game/app/features/menu/routes/menu_routes.dart';
+import 'package:gambling_game/app/features/shared/widgets/custom_appbar.dart';
 
 class LevelSelectorScreen extends ConsumerWidget {
-
   const LevelSelectorScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final levelState = ref.watch(levelProvider);
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue.shade50,
-        surfaceTintColor: Colors.blue.shade50,
-        title: Text(
-          'Slide Puzzle Levels',
-          style: TextStyle(
-            color: Colors.blue.shade800,
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Poppins',
-            shadows: [
-              Shadow(
-                color: Colors.black.withOpacity(0.3),
-                blurRadius: 10,
-                offset: const Offset(2, 2),
-              ),
-            ],
-          ),
-        ),
-        leading: IconButton(
-          icon: Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.blue.shade800,
-              size: 40,
-            ),
-          ),
-          onPressed: () {
-            AppRouter.go(MenuRoutes.menu.path);
-          },
-        ),
+      appBar: CustomAppbar(
+        tittle: 'Slide Puzzle Levels',
+        onPressed: () {
+          AppRouter.go(MenuRoutes.menu.path);
+        },
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -71,8 +44,9 @@ class LevelSelectorScreen extends ConsumerWidget {
                   itemCount: levelState.totalLevelNumbers,
                   itemBuilder: (context, index) {
                     int levelNumber = index + 1;
-                    bool isLocked = levelNumber > levelState.levelNumbersUnlocked;
-                    return PuzzleTile(
+                    bool isLocked =
+                        levelNumber > levelState.levelNumbersUnlocked;
+                    return CustomLevelButton(
                       levelNumber: levelNumber,
                       isLocked: isLocked,
                       onPressed: () {
@@ -93,12 +67,12 @@ class LevelSelectorScreen extends ConsumerWidget {
   }
 }
 
-class PuzzleTile extends StatelessWidget {
+class CustomLevelButton extends StatelessWidget {
   final int levelNumber;
   final bool isLocked;
   final VoidCallback onPressed;
 
-  const PuzzleTile({
+  const CustomLevelButton({
     super.key,
     required this.levelNumber,
     required this.isLocked,

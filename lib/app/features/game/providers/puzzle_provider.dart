@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:gambling_game/app/features/menu/providers/level_provider.dart';
 
 class PuzzleState {
   final List<int> numbers;
   final int gridSize;
   final bool isPuzzleTouched;
-  final bool isPuzzleComplete;
   final bool isTimerStarted;
   final Duration elapsedTime;
 
@@ -14,7 +16,6 @@ class PuzzleState {
     this.numbers = const [1, 2, 3, 4, 5, 6, 7, 8, 0],
     this.gridSize = 3,
     this.isPuzzleTouched = false,
-    this.isPuzzleComplete = false,
     this.isTimerStarted = false,
     this.elapsedTime = Duration.zero,
   });
@@ -23,7 +24,6 @@ class PuzzleState {
     List<int>? numbers,
     int? gridSize,
     bool? isPuzzleTouched,
-    bool? isPuzzleComplete,
     bool? isTimerStarted,
     Duration? elapsedTime,
   }) {
@@ -31,7 +31,6 @@ class PuzzleState {
       numbers: numbers ?? this.numbers,
       gridSize: gridSize ?? this.gridSize,
       isPuzzleTouched: isPuzzleTouched ?? this.isPuzzleTouched,
-      isPuzzleComplete: isPuzzleComplete ?? this.isPuzzleComplete,
       isTimerStarted: isTimerStarted ?? this.isTimerStarted,
       elapsedTime: elapsedTime ?? this.elapsedTime,
     );
@@ -76,8 +75,10 @@ class PuzzleStateNotifier extends StateNotifier<PuzzleState> {
   }
 
   bool _canMoveNumber(int index, int currentLevel) {
+    final bool levelComplete =
+        ref.read(levelProvider.notifier).isLevelComplete(currentLevel);
     int emptyIndex = state.numbers.indexOf(0);
-    return isAdjacent(index, emptyIndex) && !state.isPuzzleComplete;
+    return isAdjacent(index, emptyIndex) && !levelComplete;
   }
 
   void _swapNumbers(int index) {
@@ -99,7 +100,9 @@ class PuzzleStateNotifier extends StateNotifier<PuzzleState> {
   }
 
   bool _shouldLoadState(int currentLevel) {
-    return state.isPuzzleComplete || state.isPuzzleTouched;
+    final bool levelComplete =
+        ref.read(levelProvider.notifier).isLevelComplete(currentLevel);
+    return levelComplete || state.isPuzzleTouched;
   }
 
   void _shuffleNumbers() {
@@ -110,10 +113,14 @@ class PuzzleStateNotifier extends StateNotifier<PuzzleState> {
     state = state.copyWith(
       numbers: shuffledNumbers,
       isPuzzleTouched: true,
-      isPuzzleComplete: false,
       isTimerStarted: false,
       elapsedTime: Duration.zero,
     );
+  }
+
+  void orderNumbers() {
+    final orderedNumbers = List<int>.generate(state.gridSize * state.gridSize - 1, (index) => index + 1)..add(0);
+    state = state.copyWith(numbers: orderedNumbers);
   }
 
   void saveStateForLevel(int level) {
@@ -129,7 +136,7 @@ class PuzzleStateNotifier extends StateNotifier<PuzzleState> {
   }
 
   bool isOrdered() {
-    if (!state.isPuzzleTouched || state.isPuzzleComplete) {
+    if (!state.isPuzzleTouched) {
       return false;
     }
 
@@ -142,7 +149,6 @@ class PuzzleStateNotifier extends StateNotifier<PuzzleState> {
 
     state = state.copyWith(
       isPuzzleTouched: false,
-      isPuzzleComplete: true,
       isTimerStarted: false,
     );
 
@@ -191,8 +197,7 @@ class PuzzleStateNotifier extends StateNotifier<PuzzleState> {
   void setGridSize(int size) {
     state = state.copyWith(
       gridSize: size,
-      numbers: List<int>.generate(size * size - 1, (index) => index + 1)
-        ..add(0),
+      numbers: List<int>.generate(size * size - 1, (index) => index + 1)..add(0),
     );
   }
 }

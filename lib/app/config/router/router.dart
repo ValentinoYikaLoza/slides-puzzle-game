@@ -16,6 +16,8 @@ final router = GoRouter(
     ),
     MenuRoutes.menu,
     MenuRoutes.levelSelector,
+    MenuRoutes.typeSelector,
+    MenuRoutes.challengeSelector,
     GameRoutes.game,
     ShopRoutes.shop,
     ShopRoutes.realshop,

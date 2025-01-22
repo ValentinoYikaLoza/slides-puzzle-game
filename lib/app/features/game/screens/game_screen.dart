@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gambling_game/app/config/router/app_router.dart';
 import 'package:gambling_game/app/features/game/providers/puzzle_provider.dart';
 import 'package:gambling_game/app/features/menu/providers/level_provider.dart';
+import 'package:gambling_game/app/features/shared/widgets/custom_appbar.dart';
 import 'package:gambling_game/app/features/shared/widgets/snackbar.dart';
 
 class GameScreen extends ConsumerStatefulWidget {
@@ -54,39 +55,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final provider = ref.read(puzzleProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.blue.shade50,
-        surfaceTintColor: Colors.blue.shade50,
-        title: Text(
-          'Level ${widget.level}',
-          style: TextStyle(
-            color: Colors.blue.shade800,
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'Poppins',
-            shadows: [
-              Shadow(
-                color: Colors.black.withOpacity(0.3),
-                blurRadius: 10,
-                offset: const Offset(2, 2),
-              ),
-            ],
-          ),
-        ),
-        leading: IconButton(
-          icon: Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Icon(
-              Icons.arrow_back,
-              color: Colors.blue.shade800,
-              size: 40,
-            ),
-          ),
-          onPressed: () {
-            AppRouter.pop();
-          },
-        ),
-      ),
+      appBar: CustomAppbar(tittle: 'Level ${widget.level}'),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
