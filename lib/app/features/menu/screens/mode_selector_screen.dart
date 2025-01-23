@@ -3,11 +3,11 @@ import 'package:gambling_game/app/config/router/app_router.dart';
 import 'package:gambling_game/app/features/menu/routes/menu_routes.dart';
 import 'package:gambling_game/app/features/menu/widgets/animated_background.dart';
 import 'package:gambling_game/app/features/menu/widgets/custom_button.dart';
+import 'package:gambling_game/app/features/practice/routes/practice_routes.dart';
 import 'package:gambling_game/app/features/shared/widgets/custom_title.dart';
-import 'package:gambling_game/app/features/shop/routes/shop_routes.dart';
 
-class MenuScreen extends StatelessWidget {
-  const MenuScreen({super.key});
+class ModeSelectorScreen extends StatelessWidget {
+  const ModeSelectorScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,30 +27,21 @@ class MenuScreen extends StatelessWidget {
                   fontSize: 48,
                 ),
                 const SizedBox(height: 40),
-                // Play Button
+                // Image Puzzle Button
                 CustomButton(
-                  icon: Icons.play_arrow,
-                  label: 'Play',
+                  icon: Icons.star_outlined,
+                  label: 'Practice',
                   onPressed: () {
-                    AppRouter.go(MenuRoutes.modeSelector.path);
+                    AppRouter.go(PracticeRoutes.practice.path);
                   },
                 ),
                 const SizedBox(height: 20),
-                // Challenge Button
+                // Number Puzzle Button
                 CustomButton(
-                  icon: Icons.emoji_events,
-                  label: 'Challenges',
+                  icon: Icons.star_outlined,
+                  label: 'Levels',
                   onPressed: () {
-                    AppRouter.go(MenuRoutes.challengeSelector.path);
-                  },
-                ),
-                const SizedBox(height: 20),
-                // Shop Button
-                CustomButton(
-                  icon: Icons.shopping_cart,
-                  label: 'Shop',
-                  onPressed: () {
-                    AppRouter.go(ShopRoutes.shop.path);
+                    AppRouter.go(MenuRoutes.levelSelector.path);
                   },
                 ),
               ],

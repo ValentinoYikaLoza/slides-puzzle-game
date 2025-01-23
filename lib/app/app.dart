@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gambling_game/app/features/shared/screens/game_hud_screen.dart';
 import 'package:gambling_game/app/features/shared/widgets/loader.dart';
 import 'package:gambling_game/app/features/shared/widgets/snackbar.dart';
 
@@ -13,7 +12,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return SnackbarProvider(
       child: LoaderProvider(
-        child: GameHudScreen(child: child),
+        child: child,
       ),
     );
   }

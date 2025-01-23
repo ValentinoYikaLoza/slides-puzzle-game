@@ -1,16 +1,17 @@
-
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  final IconData icon;
+  final IconData? icon;
   final String label;
+  final double width;
   final VoidCallback onPressed;
 
   const CustomButton({
     super.key,
-    required this.icon,
+    this.icon,
     required this.label,
     required this.onPressed,
+    this.width = 300,
   });
 
   @override
@@ -21,14 +22,14 @@ class CustomButton extends StatelessWidget {
         onTap: onPressed,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          width: 300,
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+          width: width,
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.2),
+                color: Colors.black.withValues(alpha: 0.2),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),
@@ -41,8 +42,9 @@ class CustomButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, color: Colors.blue.shade800, size: 24),
-              const SizedBox(width: 10),
+              if (icon != null)
+                Icon(icon, color: Colors.blue.shade800, size: 24),
+              if (icon != null) const SizedBox(width: 10),
               Flexible(
                 child: Text(
                   label,

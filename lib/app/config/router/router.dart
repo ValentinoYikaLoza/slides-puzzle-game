@@ -1,6 +1,7 @@
 import 'package:gambling_game/app/config/router/app_router.dart';
 import 'package:gambling_game/app/features/game/routes/game_routes.dart';
 import 'package:gambling_game/app/features/menu/routes/menu_routes.dart';
+import 'package:gambling_game/app/features/practice/routes/practice_routes.dart';
 import 'package:gambling_game/app/features/shop/routes/shop_routes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,10 +17,10 @@ final router = GoRouter(
     ),
     MenuRoutes.menu,
     MenuRoutes.levelSelector,
-    MenuRoutes.typeSelector,
+    MenuRoutes.modeSelector,
     MenuRoutes.challengeSelector,
+    PracticeRoutes.practice,
     GameRoutes.game,
     ShopRoutes.shop,
-    ShopRoutes.realshop,
   ],
 );

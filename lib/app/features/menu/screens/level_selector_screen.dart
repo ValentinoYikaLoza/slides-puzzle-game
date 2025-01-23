@@ -5,6 +5,7 @@ import 'package:gambling_game/app/features/game/routes/game_routes.dart';
 import 'package:gambling_game/app/features/menu/providers/level_provider.dart';
 import 'package:gambling_game/app/features/menu/routes/menu_routes.dart';
 import 'package:gambling_game/app/features/shared/widgets/custom_appbar.dart';
+import 'package:gambling_game/app/features/shared/widgets/custom_title.dart';
 
 class LevelSelectorScreen extends ConsumerWidget {
   const LevelSelectorScreen({super.key});
@@ -14,9 +15,8 @@ class LevelSelectorScreen extends ConsumerWidget {
     final levelState = ref.watch(levelProvider);
     return Scaffold(
       appBar: CustomAppbar(
-        tittle: 'Slide Puzzle Levels',
         onPressed: () {
-          AppRouter.go(MenuRoutes.menu.path);
+          AppRouter.go(MenuRoutes.modeSelector.path);
         },
       ),
       body: Container(
@@ -32,6 +32,7 @@ class LevelSelectorScreen extends ConsumerWidget {
         ),
         child: Column(
           children: [
+            const CustomTitle(title: 'Slide Puzzle Levels'),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -90,7 +91,7 @@ class CustomLevelButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withValues(alpha: 0.2),
               blurRadius: 10,
               offset: const Offset(0, 5),
             ),
@@ -102,13 +103,19 @@ class CustomLevelButton extends StatelessWidget {
         ),
         child: Center(
           child: isLocked
-              ? const Icon(Icons.lock, color: Colors.white, size: 24)
+              ? const Icon(
+                  Icons.lock,
+                  color: Colors.white,
+                  size: 24,
+                )
               : Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.grid_on,
-                        color: Colors.blue.shade800,
-                        size: 24), // Grid icon for slide puzzle
+                    Icon(
+                      Icons.grid_on,
+                      color: Colors.blue.shade800,
+                      size: 24,
+                    ), // Grid icon for slide puzzle
                     const SizedBox(height: 5),
                     Text(
                       '$levelNumber',

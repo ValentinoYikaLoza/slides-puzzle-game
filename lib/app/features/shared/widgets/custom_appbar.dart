@@ -1,45 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:gambling_game/app/config/router/app_router.dart';
+import 'package:gambling_game/app/features/menu/routes/menu_routes.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  final String tittle;
   final Function()? onPressed;
-  const CustomAppbar({super.key, required this.tittle, this.onPressed});
+  const CustomAppbar({super.key, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.blue.shade50,
       surfaceTintColor: Colors.blue.shade50,
-      title: Text(
-        tittle,
-        style: TextStyle(
-          color: Colors.blue.shade800,
-          fontSize: 28,
-          fontWeight: FontWeight.bold,
-          fontFamily: 'Poppins',
-          shadows: [
-            Shadow(
-              color: Colors.black.withOpacity(0.3),
-              blurRadius: 10,
-              offset: const Offset(2, 2),
+      title: SizedBox(
+        height: 50,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: () {
+                onPressed ?? AppRouter.go(MenuRoutes.menu.path);
+              },
+              icon: Icon(
+                Icons.chevron_left,
+                size: 40,
+                color: Colors.blue.shade800,
+                textDirection: TextDirection.ltr,
+              ),
+            ),
+            const Spacer(),
+            Icon(
+              Icons.monetization_on,
+              color: Colors.blue.shade800,
+              size: 24,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              '100 Coins',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue.shade800,
+                fontFamily: 'Poppins',
+              ),
             ),
           ],
         ),
-      ),
-      leading: IconButton(
-        icon: Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: Icon(
-            Icons.arrow_back,
-            color: Colors.blue.shade800,
-            size: 40,
-          ),
-        ),
-        onPressed: onPressed ??
-            () {
-              AppRouter.pop();
-            },
       ),
     );
   }

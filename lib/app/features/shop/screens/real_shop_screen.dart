@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gambling_game/app/features/shared/widgets/custom_appbar.dart';
+import 'package:gambling_game/app/features/shared/widgets/custom_title.dart';
 import 'package:gambling_game/app/features/shop/widgets/custom_item.dart';
 import 'package:gambling_game/app/features/shop/widgets/custom_item_card.dart';
 
@@ -32,38 +32,41 @@ class PremiumShopScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppbar(tittle: 'Premium shop'),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Colors.blue.shade50,
-              Colors.green.shade50
-            ], // Light pastel gradient
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.blue.shade50,
+            Colors.green.shade50
+          ], // Light pastel gradient
+        ),
+      ),
+      child: Column(
+        children: [
+          const CustomTitle(title: 'Shop'),
+          ListView.builder(
+            shrinkWrap: true,
+            padding: const EdgeInsets.all(16),
+            itemCount: premiumItems.length,
+            itemBuilder: (context, index) {
+              final item = premiumItems[index];
+              return CustomItemCard(
+                item: item,
+                onPressed: () {
+                  // Simulate purchase logic
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                          'Purchased ${item.name} for \$${item.price.toStringAsFixed(2)}!'),
+                    ),
+                  );
+                },
+              );
+            },
           ),
-        ),
-        child: ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: premiumItems.length,
-          itemBuilder: (context, index) {
-            final item = premiumItems[index];
-            return CustomItemCard(
-              item: item,
-              onPressed: () {
-                // Simulate purchase logic
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                        'Purchased ${item.name} for \$${item.price.toStringAsFixed(2)}!'),
-                  ),
-                );
-              },
-            );
-          },
-        ),
+        ],
       ),
     );
   }

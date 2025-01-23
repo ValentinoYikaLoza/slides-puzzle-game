@@ -151,7 +151,7 @@ class ChallengeSelectorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppbar(tittle: 'Slide Puzzle Challenges'),
+      appBar: const CustomAppbar(),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(

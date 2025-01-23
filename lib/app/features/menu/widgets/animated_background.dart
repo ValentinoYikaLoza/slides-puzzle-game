@@ -34,7 +34,7 @@ class BackgroundPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.blue.shade300.withOpacity(0.1)
+      ..color = Colors.blue.shade300.withValues(alpha:0.1)
       ..style = PaintingStyle.fill;
 
     // Draw puzzle piece shapes
