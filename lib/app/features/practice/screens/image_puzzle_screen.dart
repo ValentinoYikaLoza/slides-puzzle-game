@@ -125,7 +125,6 @@ class ImagePuzzleScreenState extends ConsumerState<ImagePuzzleScreen> {
               width: 300,
               height: 300,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
                 border: Border.all(
                   color: Colors.blue.shade800,
                   width: 2,
@@ -149,7 +148,7 @@ class ImagePuzzleScreenState extends ConsumerState<ImagePuzzleScreen> {
                       itemCount: puzzleState.numbers.length,
                       itemBuilder: (context, index) {
                         int number = puzzleState.numbers[index];
-                        if (number == 0) {
+                        if (number == 0 && !provider.isOrdered()) {
                           return Container(
                             margin: const EdgeInsets.all(2),
                             decoration: BoxDecoration(
@@ -171,10 +170,12 @@ class ImagePuzzleScreenState extends ConsumerState<ImagePuzzleScreen> {
                             },
                             child: ClipRect(
                               child: CustomPaint(
-                                painter: _ImagePainter(
+                                painter: ImagePainter(
                                   image: _image!,
                                   gridSize: puzzleState.gridSize,
-                                  index: number - 1,
+                                  index: provider.isOrdered() && number == 0
+                                    ? puzzleState.numbers.length - 1
+                                    : number - 1,
                                 ),
                               ),
                             ),
@@ -199,12 +200,12 @@ class ImagePuzzleScreenState extends ConsumerState<ImagePuzzleScreen> {
   }
 }
 
-class _ImagePainter extends CustomPainter {
+class ImagePainter extends CustomPainter {
   final ui.Image image;
   final int gridSize;
   final int index;
 
-  _ImagePainter({
+  ImagePainter({
     required this.image,
     required this.gridSize,
     required this.index,

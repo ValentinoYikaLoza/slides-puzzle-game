@@ -19,6 +19,6 @@ class MenuRoutes {
   );
   static GoRoute challengeSelector = GoRoute(
     path: '/challenges',
-    builder: (context, state) => ChallengeSelectorScreen(),
+    builder: (context, state) => ChallengeScreen(),
   );
 }

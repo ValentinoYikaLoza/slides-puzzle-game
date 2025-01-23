@@ -44,6 +44,17 @@ class ModeSelectorScreen extends StatelessWidget {
                     AppRouter.go(MenuRoutes.levelSelector.path);
                   },
                 ),
+
+                const SizedBox(height: 20),
+                // Number Puzzle Button
+                CustomButton(
+                  icon: Icons.chevron_left,
+                  width: 200,
+                  label: 'Back',
+                  onPressed: () {
+                    AppRouter.go(MenuRoutes.menu.path);
+                  },
+                ),
               ],
             ),
           ),

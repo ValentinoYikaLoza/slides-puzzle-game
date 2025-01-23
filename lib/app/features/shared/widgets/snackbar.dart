@@ -95,7 +95,7 @@ class _SnackbarContentState extends State<_SnackbarContent> {
         children: [
           if (widget.child != null) widget.child!,
           Positioned(
-            top: 20,
+            top: 50,
             left: screenWidth / 2 - (screenWidth * 0.5 / 2),
             child: Wrap(
               direction: Axis.vertical,

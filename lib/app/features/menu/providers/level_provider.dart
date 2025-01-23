@@ -27,7 +27,7 @@ class LevelState {
 
   LevelState({
     this.levelNumbersUnlocked = 1,
-    this.totalLevelNumbers = 100,
+    this.totalLevelNumbers = 15,
   });
 
   LevelState copyWith({

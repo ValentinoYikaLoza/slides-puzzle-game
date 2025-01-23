@@ -32,6 +32,7 @@ class PuzzleSelectorScreenState extends State<PuzzleSelectorScreen> {
     return Scaffold(
       appBar: CustomAppbar(
         onPressed: () {
+          print('back');
           AppRouter.go(MenuRoutes.modeSelector.path);
         },
       ),

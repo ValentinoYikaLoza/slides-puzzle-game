@@ -3,7 +3,7 @@ import 'package:gambling_game/app/config/router/app_router.dart';
 import 'package:gambling_game/app/features/menu/routes/menu_routes.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
-  final Function()? onPressed;
+  final VoidCallback? onPressed;
   const CustomAppbar({super.key, this.onPressed});
 
   @override
@@ -17,9 +17,10 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             IconButton(
-              onPressed: () {
-                onPressed ?? AppRouter.go(MenuRoutes.menu.path);
-              },
+              onPressed: onPressed ??
+                  () {
+                    AppRouter.go(MenuRoutes.menu.path);
+                  },
               icon: Icon(
                 Icons.chevron_left,
                 size: 40,

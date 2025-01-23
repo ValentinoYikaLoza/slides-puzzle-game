@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gambling_game/app/features/shared/widgets/custom_appbar.dart';
 
-class ChallengeSelectorScreen extends StatelessWidget {
+class ChallengeScreen extends StatelessWidget {
   // Example list of challenges
   final List<ChallengeItem> challenges = [
     ChallengeItem(
       title: 'Complete 5 Puzzles',
       description: 'Solve 5 puzzles of any type.',
       reward: '100 Coins',
-      progress: 3,
+      progress: 0,
       total: 5,
     ),
     ChallengeItem(
@@ -22,21 +22,21 @@ class ChallengeSelectorScreen extends StatelessWidget {
       title: 'Finish in Under 5 Minutes',
       description: 'Complete a puzzle in less than 5 minutes.',
       reward: '200 Coins',
-      progress: 1,
+      progress: 0,
       total: 1,
     ),
     ChallengeItem(
       title: 'Win 3 Games',
       description: 'Win any 3 games.',
       reward: '150 Coins',
-      progress: 1,
+      progress: 0,
       total: 3,
     ),
     ChallengeItem(
       title: 'Play for 30 Minutes',
       description: 'Spend a total of 30 minutes playing.',
       reward: '75 Coins',
-      progress: 10,
+      progress: 0,
       total: 30,
     ),
     ChallengeItem(
@@ -50,35 +50,35 @@ class ChallengeSelectorScreen extends StatelessWidget {
       title: 'Reach Level 5',
       description: 'Reach level 5 in the game.',
       reward: '200 Coins',
-      progress: 2,
+      progress: 0,
       total: 5,
     ),
     ChallengeItem(
       title: 'Collect 500 Coins',
       description: 'Collect a total of 500 coins.',
       reward: '50 Coins',
-      progress: 250,
+      progress: 0,
       total: 500,
     ),
     ChallengeItem(
       title: 'Complete 10 Challenges',
       description: 'Complete any 10 challenges.',
       reward: '300 Coins',
-      progress: 4,
+      progress: 0,
       total: 10,
     ),
     ChallengeItem(
       title: 'Log in for 7 Days',
       description: 'Log in to the game for 7 consecutive days.',
       reward: '350 Coins',
-      progress: 3,
+      progress: 0,
       total: 7,
     ),
     ChallengeItem(
       title: 'Score 1000 Points',
       description: 'Score a total of 1000 points.',
       reward: '400 Coins',
-      progress: 600,
+      progress: 0,
       total: 1000,
     ),
     ChallengeItem(
@@ -92,7 +92,7 @@ class ChallengeSelectorScreen extends StatelessWidget {
       title: 'Watch 5 Ads',
       description: 'Watch 5 ads to earn rewards.',
       reward: '100 Coins',
-      progress: 2,
+      progress: 0,
       total: 5,
     ),
     ChallengeItem(
@@ -106,7 +106,7 @@ class ChallengeSelectorScreen extends StatelessWidget {
       title: 'Earn 1000 XP',
       description: 'Earn a total of 1000 experience points.',
       reward: '200 Coins',
-      progress: 500,
+      progress: 0,
       total: 1000,
     ),
     ChallengeItem(
@@ -120,7 +120,7 @@ class ChallengeSelectorScreen extends StatelessWidget {
       title: 'Send 10 Gifts',
       description: 'Send 10 gifts to friends.',
       reward: '100 Coins',
-      progress: 5,
+      progress: 0,
       total: 10,
     ),
     ChallengeItem(
@@ -141,12 +141,12 @@ class ChallengeSelectorScreen extends StatelessWidget {
       title: 'Play 50 Games',
       description: 'Play a total of 50 games.',
       reward: '300 Coins',
-      progress: 20,
+      progress: 0,
       total: 50,
     ),
   ];
 
-  ChallengeSelectorScreen({super.key});
+  ChallengeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

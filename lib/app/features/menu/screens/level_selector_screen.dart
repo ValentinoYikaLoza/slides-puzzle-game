@@ -52,7 +52,7 @@ class LevelSelectorScreen extends ConsumerWidget {
                       isLocked: isLocked,
                       onPressed: () {
                         if (!isLocked) {
-                          AppRouter.push('${GameRoutes.game.path}/$levelNumber'
+                          AppRouter.go('${GameRoutes.game.path}/$levelNumber'
                               .replaceAll(':level/', ''));
                         }
                       },
