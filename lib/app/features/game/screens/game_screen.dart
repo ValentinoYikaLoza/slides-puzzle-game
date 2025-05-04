@@ -104,7 +104,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomTitle(title:'Level ${widget.level}'),
+            CustomTitle(title: 'Level ${widget.level}'),
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -117,7 +117,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.2),
+                    color: Colors.black.withOpacity(0.2),
                     blurRadius: 10,
                     offset: const Offset(0, 5),
                   ),
@@ -146,7 +146,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.2),
+                      color: Colors.black.withOpacity(0.2),
                       blurRadius: 10,
                       offset: const Offset(0, 5),
                     ),
@@ -161,84 +161,84 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                   itemCount: numbers.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                        onTap: () {
-                          int emptyIndex = numbers.indexOf(0);
-                          if (provider.isAdjacent(index, emptyIndex)) {
-                            provider.moveNumber(index, widget.level);
-                            if (provider.isOrdered()) {
-                              SnackbarService.show('You won!',
-                                  type: SnackbarType.normal);
-                              ref
-                                  .read(levelProvider.notifier)
-                                  .levelUp(widget.level);
-                              Future.delayed(const Duration(milliseconds: 50),
-                                  () {
-                                AppRouter.pop();
-                              });
-                            }
-                            provider.saveStateForLevel(widget.level);
+                      onTap: () {
+                        int emptyIndex = numbers.indexOf(0);
+                        if (provider.isAdjacent(index, emptyIndex)) {
+                          provider.moveNumber(index, widget.level);
+                          if (provider.isOrdered()) {
+                            SnackbarService.show('You won!',
+                                type: SnackbarType.normal);
+                            ref
+                                .read(levelProvider.notifier)
+                                .levelUp(widget.level);
+                            Future.delayed(const Duration(milliseconds: 50),
+                                () {
+                              AppRouter.pop();
+                            });
                           }
-                        },
-                        child: !isImagePuzzle
-                            ? AnimatedContainer(
-                                duration: const Duration(milliseconds: 300),
-                                margin: const EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                  color: numbers[index] == 0
-                                      ? Colors.white
-                                      : Colors.blue.shade100,
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
+                          provider.saveStateForLevel(widget.level);
+                        }
+                      },
+                      child: !isImagePuzzle
+                          ? AnimatedContainer(
+                              duration: const Duration(milliseconds: 300),
+                              margin: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: numbers[index] == 0
+                                    ? Colors.white
+                                    : Colors.blue.shade100,
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: Colors.blue.shade800,
+                                  width: 2,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    blurRadius: 5,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: Center(
+                                child: Text(
+                                  numbers[index] == 0
+                                      ? ''
+                                      : numbers[index].toString(),
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
                                     color: Colors.blue.shade800,
-                                    width: 2,
+                                    fontFamily: 'Poppins',
                                   ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color:
-                                          Colors.black.withValues(alpha: 0.1),
-                                      blurRadius: 5,
-                                      offset: const Offset(0, 3),
-                                    ),
-                                  ],
                                 ),
-                                child: Center(
-                                  child: Text(
-                                    numbers[index] == 0
-                                        ? ''
-                                        : numbers[index].toString(),
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
+                              ),
+                            )
+                          : numbers[index] == 0 && !provider.isOrdered()
+                              ? Container(
+                                  margin: const EdgeInsets.all(2),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
                                       color: Colors.blue.shade800,
-                                      fontFamily: 'Poppins',
+                                      width: 2,
+                                    ),
+                                  ),
+                                )
+                              : ClipRect(
+                                  child: CustomPaint(
+                                    painter: ImagePainter(
+                                      image: imageLoaded,
+                                      gridSize: gridSize,
+                                      index: provider.isOrdered() &&
+                                              numbers[index] == 0
+                                          ? numbers.length - 1
+                                          : numbers[index] - 1,
                                     ),
                                   ),
                                 ),
-                              )
-                            : numbers[index] == 0 && !provider.isOrdered()
-                                ? Container(
-                                    margin: const EdgeInsets.all(2),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                        color: Colors.blue.shade800,
-                                        width: 2,
-                                      ),
-                                    ),
-                                  )
-                                : ClipRect(
-                                    child: CustomPaint(
-                                      painter: ImagePainter(
-                                        image: imageLoaded,
-                                        gridSize: gridSize,
-                                        index: provider.isOrdered() &&
-                                                numbers[index] == 0
-                                            ? numbers.length - 1
-                                            : numbers[index] - 1,
-                                      ),
-                                    ),
-                                  ));
+                    );
                   },
                 ),
               ),
